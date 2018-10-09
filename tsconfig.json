@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
     "module": "esnext",
     "target": "es5",
     "jsx": "react",
@@ -8,16 +9,9 @@
     "rootDir": "src",
     "noImplicitReturns": true,
     "noImplicitThis": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "strictNullChecks": true
   },
-  "exclude": [
-    "node_modules",
-    "dist",
-    ".data",
-    ".cache"
-  ],
-  "types": [
-    "node_modules/@types"
-  ]
+  "exclude": ["node_modules", "dist", ".data", ".cache"],
+  "types": ["node_modules/@types"]
 }

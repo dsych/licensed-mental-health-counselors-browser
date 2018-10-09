@@ -4,26 +4,39 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js localhost 8080"
+    "dev": "nodemon server.js localhost 8080",
+    "start": "mkdir .data && touch .data/db.json; node server.js"
   },
   "dependencies": {
     "axios": "latest",
-    "date-fns": "1.29.0",
-    "express": "4.16.3",
-    "ftp": "0.3.10",
-    "lowdb": "1.0.0",
-    "nodemon": "1.18.4",
-    "react": "16.5.2",
-    "react-dom": "16.5.2",
-    "react-virtualized": "9.20.1"
+    "body-parser": "^1.18.3",
+    "date-fns": "^1.29.0",
+    "elasticsearch": "^15.1.1",
+    "express": "^4.16.3",
+    "ftp": "^0.3.10",
+    "fuzzysort": "^1.1.4",
+    "lodash": "^4.17.11",
+    "lowdb": "^1.0.0",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-virtualized": "^9.20.1",
+    "rxjs": "^6.3.3"
   },
   "devDependencies": {
-    "parcel-bundler": "1.10.1",
-    "@types/express": "4.16.0",
-    "@types/lowdb": "1.0.5",
-    "@types/react-dom": "16.0.8",
-    "@types/react": "16.4.15",
-    "@types/react-virtualized": "9.18.7"
+    "@types/axios": "^0.14.0",
+    "@types/date-fns": "^2.6.0",
+    "@types/elasticsearch": "^5.0.26",
+    "@types/express": "^4.16.0",
+    "@types/ftp": "^0.3.29",
+    "@types/lowdb": "^1.0.5",
+    "@types/react": "^16.4.15",
+    "@types/react-dom": "^16.0.8",
+    "@types/react-virtualized": "^9.18.7",
+    "dotenv-cli": "^1.4.0",
+    "nodemon": "^1.18.4",
+    "parcel-bundler": "^1.10.1",
+    "prettier": "^1.14.3",
+    "typescript": "^3.1.1"
   },
   "keywords": [],
   "nodemonConfig": {

@@ -98,7 +98,7 @@ app.use("/data", require("./routes/data"));
 
 app.use(bundler.middleware());
 
-//the server object listens on port 8080
-app.listen(8080);
+//the server object listens on port 3000
+app.listen(3000);
 
-console.log("Server started at 8080");
+console.log("Server started at 3000");

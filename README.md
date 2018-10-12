@@ -14,18 +14,22 @@ Server content belongs in `server/`. Client content belongs in `src/`. The produ
 
 To install the dependencies:
 
-```
+```sh
 yarn
 ```
 
 To start the dev server:
 
-```
+```sh
 yarn dev
 ```
 
 To start the prod server:
 
-```
+```sh
 yarn start
 ```
+
+### Contributing
+
+I just ask that you follow my loose intepretation of semantic commit messages. Just take a look at the commit log for examples.

@@ -4,8 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon server.js localhost 8080",
-    "start": "mkdir .data && touch .data/db.json; node server.js"
+    "dev": "nodemon server localhost 8080",
+    "start": "mkdir .data && touch .data/db.json; node server"
   },
   "dependencies": {
     "axios": "latest",

@@ -22,6 +22,7 @@ const bundler = new Bundler(entry);
 //Provide data when requested
 app.use("/data", require("./routes/data"));
 
+// The bundler listens for requests and returns the bundled html content
 app.use(bundler.middleware());
 
 //the server object listens on port 3000

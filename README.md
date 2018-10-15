@@ -33,3 +33,5 @@ yarn start
 ### Contributing
 
 I just ask that you follow my loose intepretation of semantic commit messages. Just take a look at the commit log for examples.
+
+If you're working on a particular issue, make sure to comment on it so I can mark it as `in progress` and there's no duplicate effort spent. I'll remove `in progress` from issues that don't have any activity for 1-2 weeks, to free them up for others to work on (myself included).

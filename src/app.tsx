@@ -4,16 +4,15 @@ import axios from "axios";
 import formatDate from "date-fns/distance_in_words_to_now";
 
 import CounselorTable from "./components/counselor-table";
+import Practitioner from "./components/practitioner";
 
 interface AppState {
-  headers: string[];
   updated: string;
-  data: string[][];
+  data: Practitioner[];
 }
 export default class App extends React.Component<{}, AppState> {
   state: AppState = {
     updated: "",
-    headers: [],
     data: []
   };
 
@@ -22,12 +21,13 @@ export default class App extends React.Component<{}, AppState> {
   async componentDidMount() {
     // Fetch data from database
     const response = await axios.get<AppState>("/data");
-    const [headers, ...data] = response.data.data;
+    const [headers, ...raw] = response.data.data;
     const updated = response.data.updated;
 
+    const practitioners = raw.map(entry => new Practitioner(entry));
+
     this.setState({
-      data,
-      headers,
+      data: practitioners,
       updated
     });
   }
@@ -37,7 +37,7 @@ export default class App extends React.Component<{}, AppState> {
   };
 
   render() {
-    const { headers, updated, data } = this.state;
+    const { updated, data } = this.state;
     return (
       <>
         <h1>
@@ -47,7 +47,7 @@ export default class App extends React.Component<{}, AppState> {
             {updated ? formatDate(updated, { addSuffix: true }) : "Loading..."})
           </small>
         </h1>
-        {data.length > 0 && <CounselorTable data={data} headers={headers} />}
+        {data.length > 0 && <CounselorTable data={data} />}
       </>
     );
   }

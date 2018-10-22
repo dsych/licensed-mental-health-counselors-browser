@@ -31,7 +31,8 @@ export default class Practitioner {
     private mailingAddressZIP: string;
     private mailingAddressArea: string;
     get mailingAddress(): string {
-        return `${this.mailingAddressLine1}, ${this.mailingAddressCity} ${this.mailingAddressState}, ${this.mailingAddressZIP} ${this.mailingAddressArea}`;
+        return `Line 1: ${this.mailingAddressLine1}, ${this.mailingAddressCity} ${this.mailingAddressState}, ${this.mailingAddressZIP} ${this.mailingAddressArea}.
+        ${this.mailingAddressLine2 ? " Line 2: " + this.mailingAddressLine2 : ""}`;
     }
 
 
@@ -41,7 +42,8 @@ export default class Practitioner {
     private practiceAddressState: string;
     private practiceAddressZIP: string;
     get practiceAddress(): string {
-        return `${this.practiceAddressLine1}, ${this.practiceAddressCity} ${this.practiceAddressState}, ${this.practiceAddressZIP}`;
+        return `Line 1: ${this.practiceAddressLine1}, ${this.practiceAddressCity} ${this.practiceAddressState}, ${this.practiceAddressZIP}.
+        ${this.practiceAddressLine2 ? " Line 2: " + this.practiceAddressLine2 : ""}`;
     }
 
     email: string;

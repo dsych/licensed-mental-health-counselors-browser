@@ -27,7 +27,7 @@ export default class CounselorTable extends React.Component<
   };
 
   updateData = list => {
-    this.setState({ filteredData: list ? list.map(entry => new Practitioner(entry)) : this.props.data });
+    this.setState({ filteredData: list || this.props.data });
   };
 
   render() {

@@ -2,8 +2,7 @@ import React from "react";
 import axios from "axios";
 import { Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
-
-import { LABEL_MAPPING } from "./counselor-table";
+import Practitioner from "./practitioner";
 
 interface SearchProps {
   headers: string[];
@@ -33,7 +32,7 @@ export default class Search extends React.Component<SearchProps> {
         }
       })
         .then(result => {
-          this.props.updateData(result.data);
+          this.props.updateData(result.data ? result.data.map(entry => new Practitioner(entry)) : null);
         })
         .catch(err => {
           alert("Error searching database");

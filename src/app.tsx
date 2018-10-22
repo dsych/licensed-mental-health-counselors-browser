@@ -21,10 +21,11 @@ export default class App extends React.Component<{}, AppState> {
   async componentDidMount() {
     // Fetch data from database
     const response = await axios.get<AppState>("/data");
-    const [headers, ...raw] = response.data.data;
+    // drop the headers
+    response.data.data.shift();
     const updated = response.data.updated;
 
-    const practitioners = raw.map(entry => new Practitioner(entry));
+    const practitioners = response.data.data.map(entry => new Practitioner(entry));
 
     this.setState({
       data: practitioners,

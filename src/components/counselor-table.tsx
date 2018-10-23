@@ -2,7 +2,9 @@ import React, { RefObject } from "react";
 import { Column, Table } from "react-virtualized";
 
 import Search from "./search";
-import Practitioner from "./practitioner";
+import { Practitioner, instanceOfAddress, instanceOfPhone } from "./practitioner";
+import AddressComponent from "./address";
+import PhoneComponent from "./phone";
 
 interface CounselorTableProps {
   data: Practitioner[];
@@ -23,7 +25,15 @@ export default class CounselorTable extends React.Component<
   rowGetter = ({ index }) => this.state.filteredData[index];
 
   cellRenderer = ({ isScrolling, rowData, dataKey }) => {
-    return <div style={{ whiteSpace: "normal" }}>{rowData[dataKey]}</div>;
+    let rc;
+    if (instanceOfAddress(rowData[dataKey])) {
+      rc = <div><AddressComponent address={rowData[dataKey]} ></AddressComponent></div>
+    } else if (instanceOfPhone(rowData[dataKey])) {
+      rc = <div><PhoneComponent phone={rowData[dataKey]} ></PhoneComponent></div>
+    } else {
+      rc = <div style={{ whiteSpace: "normal" }}>{rowData[dataKey]}</div>;
+    }
+    return rc;
   };
 
   updateData = list => {
@@ -49,7 +59,7 @@ export default class CounselorTable extends React.Component<
           width={Practitioner.getTotalWidth()}
           headerHeight={40}
           height={400}
-          rowHeight={40}
+          rowHeight={60}
           rowCount={filteredData.length}
           rowGetter={this.rowGetter}
         >

@@ -1,5 +1,5 @@
 
-export default class Practitioner {
+export class Practitioner {
     licId: string;
     expDate: string;
     orgDate: string;
@@ -15,36 +15,11 @@ export default class Practitioner {
     licenseActiveStatus: string;
     county: string;
     countyDesc: string;
-    /**
-     * Format 'phone number Ext - extension'
-     */
-    private phoneNum: string;
-    private phoneExt: string;
-    get phoneNumber(): string {
-        return `${this.phoneNum}${this.phoneExt ? " Ext - " + this.phoneExt : ''}`;
-    }
 
-    private mailingAddressLine1: string;
-    private mailingAddressLine2: string;
-    private mailingAddressCity: string;
-    private mailingAddressState: string;
-    private mailingAddressZIP: string;
-    private mailingAddressArea: string;
-    get mailingAddress(): string {
-        return `Line 1: ${this.mailingAddressLine1}, ${this.mailingAddressCity} ${this.mailingAddressState}, ${this.mailingAddressZIP} ${this.mailingAddressArea}.
-        ${this.mailingAddressLine2 ? " Line 2: " + this.mailingAddressLine2 : ""}`;
-    }
+    phone: Phone;
 
-
-    private practiceAddressLine1: string;
-    private practiceAddressLine2: string;
-    private practiceAddressCity: string;
-    private practiceAddressState: string;
-    private practiceAddressZIP: string;
-    get practiceAddress(): string {
-        return `Line 1: ${this.practiceAddressLine1}, ${this.practiceAddressCity} ${this.practiceAddressState}, ${this.practiceAddressZIP}.
-        ${this.practiceAddressLine2 ? " Line 2: " + this.practiceAddressLine2 : ""}`;
-    }
+    mailingAddress: Address;
+    practiceAddress: Address;
 
     email: string;
     modCodes: string;
@@ -65,11 +40,11 @@ export default class Practitioner {
         nameSuffix: { heading: "Suffix", width: 60, queryString: "Name-Suffix" },
         businessName: { heading: "Business", width: 80, queryString: "Business-Name" },
         licenseActiveStatus: { heading: "Active?", width: 80, queryString: "License-Active-Status-Description" },
-        country: { heading: "County Num", width: 40, queryString: "County" },
-        countryDesc: { heading: "County Name", width: 140, queryString: "County-Description" },
-        phoneNumber: { heading: "Phone Num", width: 300, queryString: "" },
-        mailingAddress: { heading: "Mailing Address", width: 900, queryString: "" },
-        practiceAddress: { heading: "Practice Address", width: 740, queryString: "" },
+        county: { heading: "County Num", width: 40, queryString: "County" },
+        countyDesc: { heading: "County Name", width: 140, queryString: "County-Description" },
+        phone: { heading: "Phone Num", width: 300, queryString: "" },
+        mailingAddress: { heading: "Mailing Address", width: 500, queryString: "" },
+        practiceAddress: { heading: "Practice Address", width: 500, queryString: "" },
         email: { heading: "Email", width: 240, queryString: "Email" },
         modCodes: { heading: "Mod Codes", width: 200, queryString: "Mod-Cdes" },
         prescriptionIndicator: { heading: "Prescribe?", width: 110, queryString: "Prescribe-Ind" },
@@ -92,19 +67,28 @@ export default class Practitioner {
         this.licenseActiveStatus = raw[12];
         this.county = raw[13];
         this.countyDesc = raw[14];
-        this.mailingAddressLine1 = raw[15];
-        this.mailingAddressLine2 = raw[16];
-        this.mailingAddressCity = raw[17];
-        this.mailingAddressState = raw[18];
-        this.mailingAddressZIP = raw[19];
-        this.mailingAddressArea = raw[20];
-        this.phoneNum = raw[21];
-        this.phoneExt = raw[22];
-        this.practiceAddressLine1 = raw[23];
-        this.practiceAddressLine2 = raw[24];
-        this.practiceAddressCity = raw[25];
-        this.practiceAddressState = raw[26];
-        this.practiceAddressZIP = raw[27];
+        this.mailingAddress = {
+            discriminator: "isAddress",
+            line1: raw[15],
+            line2: raw[16],
+            city: raw[17],
+            state: raw[18],
+            ZIP: raw[19]
+        };
+        this.phone = {
+            discriminator: "isPhone",
+            area: raw[20],
+            phoneNum: raw[21],
+            phoneExt: raw[22]
+        };
+        this.practiceAddress = {
+            discriminator: "isAddress",
+            line1: raw[23],
+            line2: raw[24],
+            city: raw[25],
+            state: raw[26],
+            ZIP: raw[27]
+        };
         this.email = raw[28];
         this.modCodes = raw[29];
         this.prescriptionIndicator = raw[30];
@@ -118,3 +102,30 @@ export default class Practitioner {
         );
     }
 }
+
+export interface Address {
+    discriminator: "isAddress";
+    line1: string;
+    line2: string;
+    city: string;
+    state: string;
+    ZIP: string;
+}
+
+export const instanceOfAddress = (object: any): object is Address => {
+    return object.discriminator === "isAddress";
+}
+
+
+export interface Phone {
+    discriminator: "isPhone";
+    phoneNum: string;
+    phoneExt: string;
+    area: string;
+}
+
+export const instanceOfPhone = (object: any): object is Phone => {
+    return object.discriminator === "isPhone";
+}
+
+

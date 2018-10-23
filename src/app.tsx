@@ -4,7 +4,7 @@ import axios from "axios";
 import formatDate from "date-fns/distance_in_words_to_now";
 
 import CounselorTable from "./components/counselor-table";
-import Practitioner from "./components/practitioner";
+import { Practitioner } from "./components/practitioner";
 
 interface AppState {
   updated: string;

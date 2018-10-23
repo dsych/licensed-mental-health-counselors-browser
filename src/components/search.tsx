@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
-import Practitioner from "./practitioner";
+import { Practitioner } from "./practitioner";
 
 interface SearchProps {
   headers: string[];

@@ -4,12 +4,12 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "clean": "rm -rf .data .cache build dist",
     "lint:typescript": "tsc --noEmit",
     "dev": "nodemon server/index.ts",
     "build:server": "tsc",
     "build:db": "mkdir .data && touch .data/db.json",
-    "build": "yarn build:db; yarn build:server",
-    "start": "node build/index.js"
+    "start": "yarn lint:typescript && yarn clean && yarn build:db && yarn build:server && node build/index.js"
   },
   "dependencies": {
     "axios": "latest",
@@ -21,6 +21,7 @@
     "fuzzysort": "^1.1.4",
     "lodash": "^4.17.11",
     "lowdb": "^1.0.0",
+    "parcel-bundler": "^1.10.1",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-virtualized": "^9.20.1",
@@ -38,7 +39,6 @@
     "@types/react-virtualized": "^9.18.7",
     "dotenv-cli": "^1.4.0",
     "nodemon": "^1.18.4",
-    "parcel-bundler": "^1.10.1",
     "prettier": "^1.14.3",
     "ts-node": "^7.0.1",
     "typescript": "^3.1.1"
@@ -52,5 +52,8 @@
       ".data/*"
     ],
     "exec": "ts-node"
+  },
+  "engines": {
+    "node": "10.x"
   }
 }

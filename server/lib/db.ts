@@ -1,9 +1,10 @@
 // Setup the lowdb database
-const low = require("lowdb");
-const FileSync = require("lowdb/adapters/FileSync");
+import low from "lowdb";
+import FileSync from "lowdb/adapters/FileSync";
+
 const adapter = new FileSync(".data/db.json");
 
-module.exports = () => {
+export default () => {
   const db = low(adapter);
 
   // Sets the defaults for the lowdb if the file does not contain data.
@@ -33,7 +34,7 @@ module.exports = () => {
           throw err;
         }
 
-        const chunks = [];
+        const chunks: string[] = [];
 
         // WHen the stream recieves data, save it to an array
         stream.on("data", chunk => {
@@ -89,9 +90,6 @@ module.exports = () => {
             data.length - 1,
             " entries written to db"
           );
-
-          // Deletes our chunks var. Probably not needed, but what the hell ¯\_(ツ)_/¯
-          delete chunks;
 
           // Shut down the ftp client, as we are done here.
           client.end();

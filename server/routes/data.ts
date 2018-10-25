@@ -1,8 +1,8 @@
-const router = require("express").Router();
-const bodyParser = require("body-parser");
-// const fuzzysort = require("fuzzysort");
+import { Router } from "express";
+import bodyParser from "body-parser";
 
-// Data router is default
+const router = Router();
+
 router.get("/", (req, res, next) => {
   res.json({
     data: req.db.get("data").value(),
@@ -61,4 +61,4 @@ router.search("/", bodyParser.json(), (req, res, next) => {
   res.end();
 });
 
-module.exports = router;
+export default router;

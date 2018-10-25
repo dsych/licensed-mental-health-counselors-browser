@@ -1,16 +1,22 @@
-const path = require("path");
-const app = require("express")();
+import path from "path";
+import Bundler from "parcel-bundler";
+
+import setupDatabase from "./lib/db";
+import dataRoutes from "./routes/data";
+
+import express from "express";
+import { Request } from "../types/custom";
+
+const app = express();
 
 // Setup parcel bundler /w entry index
-const Bundler = require("parcel-bundler");
 const entry = path.resolve(__dirname, "../src/index.html");
 
 //setup db
-const setupDatabase = require("./lib/db");
-
 const db = setupDatabase();
-// add db to app context
-app.use((req, res, next) => {
+
+// add db to req context
+app.use((req: Request, res, next) => {
   req.db = db;
   next();
 });
@@ -20,7 +26,7 @@ console.log("Starting server...");
 const bundler = new Bundler(entry);
 
 //Provide data when requested
-app.use("/data", require("./routes/data"));
+app.use("/data", dataRoutes);
 
 // The bundler listens for requests and returns the bundled html content
 app.use(bundler.middleware());

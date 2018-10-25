@@ -4,8 +4,12 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon server localhost 8080",
-    "start": "mkdir .data && touch .data/db.json; node server"
+    "lint:typescript": "tsc --noEmit",
+    "dev": "nodemon server/index.ts",
+    "build:server": "tsc",
+    "build:db": "mkdir .data && touch .data/db.json",
+    "build": "yarn build:db; yarn build:server",
+    "start": "yarn build && node build"
   },
   "dependencies": {
     "axios": "latest",
@@ -36,6 +40,7 @@
     "nodemon": "^1.18.4",
     "parcel-bundler": "^1.10.1",
     "prettier": "^1.14.3",
+    "ts-node": "^7.0.1",
     "typescript": "^3.1.1"
   },
   "keywords": [],
@@ -45,6 +50,7 @@
       "dist/*",
       ".cache/*",
       ".data/*"
-    ]
+    ],
+    "exec": "ts-node"
   }
 }

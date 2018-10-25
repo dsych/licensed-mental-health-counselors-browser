@@ -1,17 +1,21 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
-    "module": "esnext",
+    "module": "commonjs",
     "target": "es5",
     "jsx": "react",
     "sourceMap": true,
     "moduleResolution": "node",
-    "rootDir": "src",
+    "rootDir": "server",
+    "esModuleInterop": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noImplicitAny": false,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "typeRoots": ["node_modules/@types", "types/*"],
+    "outDir": "build",
+    "skipLibCheck": true
   },
   "exclude": ["node_modules", "dist", ".data", ".cache"],
-  "types": ["node_modules/@types"]
+  "include": ["server"]
 }

@@ -5,7 +5,13 @@ import setupDatabase from "./lib/db";
 import dataRoutes from "./routes/data";
 
 import express from "express";
-import { Request } from "../types/custom";
+
+/**
+ * @FIXME
+ * Declaration merging is not working for some reason.
+ * If we import here we don't have to specifically type our Requests, but importing a *.d.ts isn't correct, is it?
+ */
+import * as Express from "../types/custom";
 
 const app = express();
 
@@ -16,7 +22,7 @@ const entry = path.resolve(__dirname, "../src/index.html");
 const db = setupDatabase();
 
 // add db to req context
-app.use((req: Request, res, next) => {
+app.use((req, res, next) => {
   req.db = db;
   next();
 });

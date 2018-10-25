@@ -9,7 +9,7 @@
     "build:server": "tsc",
     "build:db": "mkdir .data && touch .data/db.json",
     "build": "yarn build:db; yarn build:server",
-    "start": "yarn build && node build"
+    "start": "node build/index.js"
   },
   "dependencies": {
     "axios": "latest",

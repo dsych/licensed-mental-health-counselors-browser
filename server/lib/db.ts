@@ -1,6 +1,7 @@
 // Setup the lowdb database
 import low from "lowdb";
 import FileSync from "lowdb/adapters/FileSync";
+import { PractitionerSchema } from "./practitioner-schema";
 
 const adapter = new FileSync(".data/db.json");
 
@@ -62,8 +63,11 @@ export default () => {
               // We also dont need the "Rank Code," whatever that is.
               array.splice(3, 1);
 
-              return array;
+              return new PractitionerSchema(array);
             });
+
+          //drop the headers
+          data.shift();
 
           db.set("data", data).write();
 
@@ -79,8 +83,8 @@ export default () => {
           db.set(
             "search_data",
             data.slice(1).map(counselor => ({
-              id: counselor[0],
-              text: counselor.join(" "),
+              id: counselor.licId,
+              text: JSON.stringify(counselor),
               node: counselor
             }))
           ).write();

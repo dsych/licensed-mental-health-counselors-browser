@@ -9,7 +9,7 @@
     "dev": "nodemon server/index.ts",
     "build:server": "tsc",
     "build:db": "mkdir .data && touch .data/db.json",
-    "start": "yarn lint:typescript && yarn clean && yarn build:db && yarn build:server && node build/index.js"
+    "start": "npm run lint:typescript && npm run clean && npm run build:db && npm run build:server && node build/index.js"
   },
   "dependencies": {
     "axios": "latest",

@@ -6,7 +6,7 @@ This was a process which used to require some technical understanding and a _lot
 
 ## Getting Started
 
-I created this repo with ease of development in mind. I eschewed any frameworks or plugins and instead elected to create a simple express server and a react.js front end. The project is built and serve automatically by Parcel.js.
+I created this repo with ease of development in mind. I eschewed any frameworks or plugins and instead elected to create a simple express server and a react.js front end. The project is built and served automatically by Parcel.js.
 
 Server content belongs in `server/`. Client content belongs in `src/`. The production build is served from `dist/` automatically by the parcel middleware, and the database is stored in '.data/.
 
